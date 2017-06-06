@@ -1,11 +1,10 @@
 # GitAchieve [![Build Status](https://travis-ci.org/Groovy-Narwhal/GitAchieve.svg?branch=master)](https://travis-ci.org/Groovy-Narwhal/GitAchieve) [![Dependency Status](https://david-dm.org/Groovy-Narwhal/GitAchieve.svg?style=flat)](https://david-dm.org/Groovy-Narwhal/GitAchieve)
 A webapp to promote positive GitHub behavior through friendly competition.
-See GitAchieve live at [**www.gitachieve.com**](http://www.gitachieve.com)
 
 ![Demo](https://github.com/Groovy-Narwhal/GitAchieve/blob/master/docs/GA-demo-1-1.gif)
 
 ## Team
-- <img src="https://avatars.githubusercontent.com/u/4149515?v=3" width="64"> [**Inje Yeo - Scrum Master**] (https://github.com/byeo630)
+- <img src="https://avatars.githubusercontent.com/u/4149515?v=3" width="64"> [**Inje Yeo - Scrum Master**](https://github.com/byeo630)
 
 - <img src="https://avatars.githubusercontent.com/u/15864056?v=3" width="64"> [**Alex Nitta - Product Owner**](https://github.com/alexnitta)
 

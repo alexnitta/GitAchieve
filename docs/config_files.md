@@ -16,7 +16,7 @@ You must create these files locally before the app will run.
   };
   ```
 
-See notes in [GitHub oAuth](docs/github_oath.md) to set up your Client ID and Client Secret.
+See notes in [GitHub oAuth](docs/github_oauth.md) to set up your Client ID and Client Secret.
   
 - `server/config/github.config.js`
   ```javascript

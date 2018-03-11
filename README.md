@@ -23,7 +23,7 @@ A webapp to promote positive GitHub behavior through friendly competition.
 1. Clone down the repo `git clone https://github.com/Groovy-Narwhal/GitAchieve.git`
 2. Change directory into GitAchieve `cd GitAchieve/`
 3. Install dependencies `npm install`
-4. Set up your (config files)[./docs/config_files.md] and (database)[./docs/db_setup.md]
+4. Set up your [config files](docs/config_files.md) and [database](docs/db_setup.md)
 5. Run the server `npm run serve`
 6. Open your browser to `localhost:8000`
 

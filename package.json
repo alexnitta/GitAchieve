@@ -79,7 +79,7 @@
     "gulp-util": "^3.0.7",
     "immutable": "^3.8.1",
     "jasmine-node": "^1.14.5",
-    "jquery": "^2.2.3",
+    "jquery": "^3.0.0",
     "jsdom": "^8.0.1",
     "jshint": "^2.9.2",
     "logger": "0.0.1",

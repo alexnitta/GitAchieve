@@ -7,9 +7,6 @@ server/config/dbConfig.js
 server/config/github.config.js
 server/config/sendGridKey.js
 
-# SendGrid key
-server/config/sendGridKey.js
-
 .DS_Store
 
 # Dependency directories

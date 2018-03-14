@@ -7,6 +7,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 import FriendList from './components/FriendList';
+import History from './components/History';
 
 const ROOT_URL = require('../../../server/config/config-settings').CALLBACKHOST;
 
@@ -147,39 +148,6 @@ class UserProfile extends Component {
     }
   }
 
-  renderHistory() {
-    return (
-      <table className="child history-table">
-        <tbody>
-        {this.state.history.map((comp, ind) =>
-          <tr key={ind}>
-            <td><img src={comp.competitorAvatar} className="user-avatar-med" /><span className="block">{comp.competitor}</span></td>
-
-            {comp.champion === this.props.user.username ?
-              <td><img src="./../static/assets/trophy-1-3.png" height="50px" width="44px" className="logo"/></td>
-              : <td><img src="./../static/assets/surrender.png" height="50px" width="50px" className="logo"/></td>
-            }
-            {comp.champion === this.props.user.username ?
-              <td>You Won!</td> : <td>You Lost</td>
-            }
-          </tr>
-        )}
-        </tbody>
-      </table>
-    )
-  }
-
-  renderFriends() {
-    if (this.state.friends.length !== 0) {
-      return this.state.friends.map(friend => (
-        <div key={friend.id} className="competitor-card data-result-container">
-          <img src={friend.avatar_url} className="user-avatar-med" />
-          <h3 className="font-dark-gray">{friend.username}</h3>
-        </div>
-      ));
-    }
-  }
-
   render() {
     return (
       <div className="data-results-container">
@@ -191,7 +159,10 @@ class UserProfile extends Component {
               <h3>{this.props.user.username}</h3>
             </div>
             <div className="comp-result-container comp-history">
-              {this.renderHistory()}
+              <History
+                history={this.state.history}
+                user={this.props.user}
+              />
             </div>
           </div>
         </div>

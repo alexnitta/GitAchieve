@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router';
 import { bindActionCreators } from 'redux';
@@ -20,9 +21,9 @@ class UserProfile extends Component {
    * 
    * Required props:
    *   `user`: object of current user. Provided by Redux store.
-   *   `pastCompetitions`: array of objects, each one representing a past competition. Provided by 
-   *     Redux store
-   *   `actions`: object of bound action creators, supplied by the imported `actions`
+   *   `pastCompetitions`: array of arrays, each one representing a past competition. Provided by 
+   *     Redux store.
+   *   `actions`: object of bound action creators, provided by the imported `actions`.
    */
   
   constructor(props) {
@@ -59,7 +60,7 @@ class UserProfile extends Component {
   fetchHistory = () => {
     
     /**
-     * GET a list of competition history from the API.ß
+     * GET a list of competition history from the API.
      */
     
     var competitions = this.props.pastCompetitions[0].map(comp => {
@@ -175,6 +176,12 @@ class UserProfile extends Component {
       </div>
     )
   }
+}
+
+UserProfile.propTypes = {
+  user: PropTypes.object.isRequired,
+  pastCompetitions: PropTypes.arrayOf(PropTypes.array).isRequired,
+  actions: PropTypes.objectOf(PropTypes.func).isRequired
 }
 
 const mapStateToProps = (state) => {

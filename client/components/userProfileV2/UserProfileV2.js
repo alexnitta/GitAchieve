@@ -4,10 +4,11 @@ import { browserHistory, Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import actions from '../../actions/ActionCreators';
 import axios from 'axios';
-import moment from 'moment';
 
 import FriendList from './components/FriendList';
 import History from './components/History';
+import Events from './components/Events';
+
 
 const ROOT_URL = require('../../../server/config/config-settings').CALLBACKHOST;
 
@@ -67,7 +68,6 @@ class UserProfile extends Component {
       axios.get(`${ROOT_URL}/api/v1/users/${comp.competitor}`)
         .then((res, index) => {
           var champion = (res.data.id === comp.champion) ? res.data.username : comp.champion;
-          // var newHistory = this.state.history.concat({ champion: champion, compei})
           result.push({champion, competitor: res.data.username, competitorAvatar: res.data.avatar_url});
           if (result.length === length) {
             this.setState({history: result});
@@ -93,75 +93,32 @@ class UserProfile extends Component {
     }
   }
 
-  eventTypeFilter(event) {
-    switch (event.type) {
-      case 'PushEvent':
-        return (
-          <div className="data-result-container event-commits">
-            <img src="./../static/assets/circle-star-1-1.svg" height="15px" width="15px"/>
-            <h3 className="event-title">You pushed {event.payload.commits.length} commits to {event.repo.name}</h3>
-          </div>
-         );
-      case 'PullRequestEvent':
-        return (
-          <div className="data-result-container">
-            <img src="./../static/assets/git-pull-request-1-2.png" />
-            <h3>You {event.payload.action} a pull-request</h3>
-            <p>number of commits: {event.payload.pull_request.commits}</p>
-            <p>number of changed files: {event.payload.pull_request.changed_files}</p>
-            <p>number of additions: {event.payload.pull_request.additions}</p>
-            <p>number of deletions: {event.payload.pull_request.deletions}</p>
-          </div>
-        );
-      default:
-        return (<div></div>);
-    }
-  }
-
-  renderEvents() {
-    if (this.props.searchUserEvents.length > 0) {
-      return this.props.searchUserEvents.map((event, index) => {
-        if (event.type === 'PushEvent' || event.type === 'PullRequestEvent') {
-          return (
-            <div key={index} className="search-result-container" >
-              <h3 className="event-title">{event.type}</h3>
-              <span className="event-title"> at </span>
-              <h3 className="event-title">{event.repo.name}</h3>
-              <span>{event.created_at}</span>
-              {this.eventTypeFilter(event)}
-            </div>
-          )
-        }
-      });
-    } else {
-      return this.state.userEvents.map((event, index) => {
-        if (event.type === 'PushEvent' || event.type === 'PullRequestEvent') {
-          return (
-            <div key={index} className="search-result-container" >
-              <span className="font-medium-gray font-weight-light fonts-size-regular">{moment(new Date(event.created_at)).fromNow()}</span>
-              <div className="spacer-5px"/>
-              {this.eventTypeFilter(event)}
-            </div>
-          )
-        }
-      });
-    }
-  }
-
   render() {
+    
+    const {
+      user,
+      searchUserEvents,
+    } = this.props;
+    
+    const {
+      history,
+      friends,
+      userEvents,
+    } = this.state;
+    
     return (
       <div className="data-results-container">
         <div className="data-result-container">
           <h2>Competition History</h2>
           <div>
             <div className="comp-result-container history-img">
-              <img src={this.props.user.avatar_url} className="user-avatar-med2 border-1px-white" />
-              <h3>{this.props.user.username}</h3>
+              <img src={user.avatar_url} className="user-avatar-med2 border-1px-white" />
+              <h3>{user.username}</h3>
             </div>
             <div className="comp-result-container comp-history">
               <History
-                history={this.state.history}
-                user={this.props.user}
+                history={history}
+                user={user}
               />
             </div>
           </div>
@@ -169,11 +126,14 @@ class UserProfile extends Component {
         <div className="data-result-container">
           <h2>Friends</h2>
           <FriendList
-            friends={this.state.friends}
+            friends={friends}
           />
         </div>
         <div className="comp-result-container full-width">
-          {this.renderEvents()}
+          <Events
+            searchUserEvents={searchUserEvents}
+            userEvents={userEvents}
+          />
         </div>
       </div>
     )

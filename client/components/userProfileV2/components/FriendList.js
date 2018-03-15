@@ -22,5 +22,5 @@ export default function FriendList(props) {
     ));
   }
   
-  return <h3>To add friends, set up a competition!</h3>
+  return <p>To add friends, set up a competition!</p>
 }

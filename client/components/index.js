@@ -5,7 +5,7 @@ export Header from './header';
 export About from './about';
 export Search from './search';
 export SearchResults from './searchResults';
-export UserProfile from './userProfile/UserProfile';
+export UserProfile from './userProfile';
 export Repos from './repos';
 export CumulativeChart from './../chartmakers/cumulativeChart';
 export DailyChart from './../chartmakers/dailyChart';

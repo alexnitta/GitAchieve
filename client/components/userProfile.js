@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import actions from '../../actions/ActionCreators';
+import actions from './../actions/ActionCreators';
 import axios from 'axios';
 
-import FriendList from './components/FriendList';
-import History from './components/History';
-import Events from './components/Events';
+import FriendList from './userProfileComponents/FriendList';
+import History from './userProfileComponents/History';
+import Events from './userProfileComponents/Events';
 
 
-const ROOT_URL = require('../../../server/config/config-settings').CALLBACKHOST;
+const ROOT_URL = require('../../server/config/config-settings').CALLBACKHOST;
 
 class UserProfile extends Component {
   

@@ -36,11 +36,11 @@ class UserProfile extends Component {
 
   componentWillMount() {
     this.fetchFriends();
-    this.fetchEvents.call(this)
-    this.fetchHistory()
+    this.fetchEvents();
+    this.fetchHistory();
   }
 
-  fetchHistory() {
+  fetchHistory = () => {
     var competitions = this.props.pastCompetitions[0].map(comp => {
       var competitor, champion;
       if (comp.primary_user_id === this.props.user.id) {
@@ -74,14 +74,14 @@ class UserProfile extends Component {
           }
         });
     });
-  }
+  };
 
-  fetchFriends() {
+  fetchFriends = () => {
     axios.get(`${ROOT_URL}/api/v1/users/${this.props.user.id}/friends`)
       .then(data => this.setState({friends: data.data}))
-  }
+  };
 
-  fetchEvents() {
+  fetchEvents = () => {
     if (window.location.pathname.includes(this.props.user.username)) {
       axios.get(`https://api.github.com/users/${this.props.user.username}/events`, this.state.options.headers)
         .then(response => this.setState({userEvents: response.data}))
@@ -91,7 +91,7 @@ class UserProfile extends Component {
       axios.get(`https://api.github.com/users/${username}/events`, this.state.options.headers)
         .then(response => this.setState({userEvents: response.data}))
     }
-  }
+  };
 
   render() {
     

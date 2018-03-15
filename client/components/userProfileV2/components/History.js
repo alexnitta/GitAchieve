@@ -6,8 +6,8 @@ export default function History(props) {
    * Displays a table of competition history.
    * 
    * Required props:
-   *   `history`:
-   *   `user`: 
+   *   `history`: an array of history items
+   *   `user`: object with `username` property
    */
   
   const {

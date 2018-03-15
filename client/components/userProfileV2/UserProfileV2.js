@@ -13,6 +13,18 @@ import Events from './components/Events';
 const ROOT_URL = require('../../../server/config/config-settings').CALLBACKHOST;
 
 class UserProfile extends Component {
+  
+  /**
+   * Displays a user's profile, which includes their competition history, friends (opponents from
+   * past competitions), and a list of GitHub push and pull request events.
+   * 
+   * Required props:
+   *   `user`: object of current user. Provided by Redux store.
+   *   `pastCompetitions`: array of objects, each one representing a past competition. Provided by 
+   *     Redux store
+   *   `actions`: object of bound action creators, supplied by the imported `actions`
+   */
+  
   constructor(props) {
     super(props);
     this.state = {

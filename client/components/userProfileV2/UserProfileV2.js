@@ -26,7 +26,9 @@ class UserProfile extends Component {
    */
   
   constructor(props) {
+
     super(props);
+    
     this.state = {
       history: [],
       friends: [],
@@ -43,16 +45,23 @@ class UserProfile extends Component {
   }
   
   componentWillUnmount() {
+    
     this.props.actions.searchUserEvents([]);
   }
 
   componentWillMount() {
+    
     this.fetchFriends();
     this.fetchEvents();
     this.fetchHistory();
   }
 
   fetchHistory = () => {
+    
+    /**
+     * GET a list of competition history from the API.ß
+     */
+    
     var competitions = this.props.pastCompetitions[0].map(comp => {
       var competitor, champion;
       if (comp.primary_user_id === this.props.user.id) {
@@ -73,33 +82,49 @@ class UserProfile extends Component {
         champion
       };
     });
+    
     var result = [];
     var length = competitions.length;
+    
     competitions.sort((a, b) => (new Date(a.competitionEnd) > new Date(b.competitionEnd)))
-    .forEach((comp) => {
-      axios.get(`${ROOT_URL}/api/v1/users/${comp.competitor}`)
-        .then((res, index) => {
-          var champion = (res.data.id === comp.champion) ? res.data.username : comp.champion;
-          result.push({champion, competitor: res.data.username, competitorAvatar: res.data.avatar_url});
-          if (result.length === length) {
-            this.setState({history: result});
-          }
-        });
-    });
+      .forEach((comp) => {
+        axios.get(`${ROOT_URL}/api/v1/users/${comp.competitor}`)
+          .then((res, index) => {
+            var champion = (res.data.id === comp.champion) ? res.data.username : comp.champion;
+            result.push({champion, competitor: res.data.username, competitorAvatar: res.data.avatar_url});
+            if (result.length === length) {
+              this.setState({history: result});
+            }
+          });
+      });
   };
 
   fetchFriends = () => {
+    
+    /**
+     * GET a list of friends from the API.
+     */
+    
     axios.get(`${ROOT_URL}/api/v1/users/${this.props.user.id}/friends`)
       .then(data => this.setState({friends: data.data}))
   };
 
   fetchEvents = () => {
+    
+    /**
+     * GET a list of events for this user from GitHub.
+     */
+    
     if (window.location.pathname.includes(this.props.user.username)) {
+    
       axios.get(`https://api.github.com/users/${this.props.user.username}/events`, this.state.options.headers)
         .then(response => this.setState({userEvents: response.data}))
+    
     } else {
+    
       let slicedName = window.location.pathname.slice(1);
-      let username = slicedName.slice(0, slicedName.indexOf('/'))
+      let username = slicedName.slice(0, slicedName.indexOf('/'));
+    
       axios.get(`https://api.github.com/users/${username}/events`, this.state.options.headers)
         .then(response => this.setState({userEvents: response.data}))
     }

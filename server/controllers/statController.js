@@ -103,9 +103,18 @@ exports.updateStats = function(req, res) {
       if (error) {
         console.error('Error in getStatsFromGitHub: ', error);
       } else {
-        var statsArray = JSON.parse(stats);
-        if (Array.isArray(statsArray)) {
-          statsArray.forEach((stat) => {
+        
+        if (!Array.isArray(stats) && typeof stats === 'string') {
+          try {
+            stats = JSON.parse(stats);
+          }
+          catch(error) {
+            console.error('Error parsing stats as JSON: ', error)
+          }
+        }
+        
+        if (Array.isArray(stats)) {
+          stats.forEach((stat) => {
             deleteStatFromDb(combo, repo, stat, saveStatToDb);
           });
         }

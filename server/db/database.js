@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 var db = pgp(dbConfig);
 
-db.tx(t=> t.one(sql.test)
+db.tx(t => t.one(sql.test)
   .then((data) => {
     //  if users table doesn't exist, rebuild database
     if (!data.exists) {
